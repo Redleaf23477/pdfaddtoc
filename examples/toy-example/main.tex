@@ -1,0 +1,66 @@
+% Thanks https://rainnic.altervista.org/en/content/how-add-clickable-toc-pdf-file?language_content_entity=en
+% Thanks chatGPT, stackoverflow ><
+
+\documentclass[openany]{book} % openany: Makes chapters begin on the next available page (instead of the right page)
+
+\usepackage[letterpaper]{geometry}
+\usepackage{pdfpages}	
+\usepackage[bookmarksnumbered]{hyperref} % Numbers the sections in pdf outline
+
+% Set the input PDF filename
+\def\myfile{book-no-outline.pdf}
+
+% Adjust the number width in TOC if needed
+\usepackage[titles]{tocloft}
+\setlength{\cftchapnumwidth}{3em} % Manipulate chapter number width in TOC
+\setlength{\cftsecnumwidth}{3em}  % Manipulate section number width in TOC
+
+% Define the page style
+\makeatletter
+\def\ps@mystyle{%
+  \let\@oddhead\@empty% header empty on odd pages
+  \let\@evenhead\@empty% header empty on even pages
+}
+\makeatother
+
+% Set the author and title
+\author{Redleaf23477}
+\title{Any Random Book}
+
+\begin{document}
+
+% Uncomment if you want roman numbered chapters
+% \renewcommand{\thechapter}{\Roman{chapter}}
+
+\frontmatter
+
+% Set the page number. Page 0 for the book cover.
+\setcounter{page}{0}
+
+% Include the prologue and add it to the TOC
+\includepdf[pages={1-2},pagecommand=\thispagestyle{mystyle},addtotoc={
+  2,chapter,1,{Preface},chap:preface
+}]{\myfile}
+
+\tableofcontents 
+\addcontentsline{toc}{chapter}{Contents}
+
+\mainmatter
+
+% Include the main content and add it to the TOC
+\includepdf[pages={4-6},pagecommand=\thispagestyle{mystyle},addtotoc={
+  4,chapter,1,{This is a title},chap:ch1,
+  4,section,2,{This is a subtitle},sec:ch1-1,
+  5,section,2,{This is a subtitle},sec:ch1-2,
+  6,chapter,1,{This is a title},chap:ch2,
+  6,section,2,{This is a subtitle},sec:ch2-1
+}]{\myfile}
+
+\backmatter
+
+% Include the postscript and add it to the TOC
+\includepdf[pages={7-7},pagecommand=\thispagestyle{mystyle},addtotoc={
+  7,chapter,1,{Postscript},chap:postscript
+}]{\myfile}
+
+\end{document}

@@ -1,0 +1,55 @@
+% A naughty book where the pdf outline is not generated
+
+\documentclass{report}
+
+\usepackage[letterpaper]{geometry}
+\usepackage{blindtext}
+
+% Naughty book do not use hyperref package, haha outline unavailable
+% \usepackage[bookmarksnumbered]{hyperref} 
+
+\author{Redleaf23477}
+\title{Any Random Book}
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\maketitle
+\pagebreak
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\blindtext
+\pagebreak
+
+\tableofcontents
+\addcontentsline{toc}{chapter}{Contents}
+\pagebreak
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\chapter{This is a title}
+\blindtext
+
+\section{This is a subtitle}
+\blindtext
+\blindtext
+\blindtext
+
+\section{This is a subtitle}
+\blindtext
+
+\chapter{This is a tilte}
+\blindtext
+
+\section{This is a subtitle}
+\blindtext
+
+\pagebreak
+\chapter*{Postscript}
+\addcontentsline{toc}{chapter}{Postscript}
+\blindtext
+
+\end{document}
